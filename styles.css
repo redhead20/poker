@@ -20,7 +20,7 @@
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
 
-/* ✅ Footer overlap fix: body is a flex column layout */
+/* Footer overlap fix */
 body{
   margin:0;
   min-height: 100vh;
@@ -109,8 +109,8 @@ h1{ margin:0; font-size: 20px; letter-spacing: 0.2px; }
 .wrap{
   max-width: 1100px;
   margin: 14px auto 0;
-  padding: 0 14px 96px; /* ✅ extra bottom padding so footer never covers anything */
-  flex: 1 0 auto;       /* ✅ main grows and pushes footer down */
+  padding: 0 14px 96px;
+  flex: 1 0 auto;
 }
 
 .view{ display:none; }
@@ -221,14 +221,14 @@ h1{ margin:0; font-size: 20px; letter-spacing: 0.2px; }
   flex-wrap: wrap;
 }
 
-/* Card UI */
+/* ===== Card UI (ALL BLACK TEXT) ===== */
 .cardUI{
   width: 58px;
   height: 80px;
   border-radius: 14px;
   background:
     radial-gradient(circle at 30% 20%, rgba(255,255,255,0.96), rgba(255,255,255,0.80) 45%, rgba(255,255,255,0.92));
-  color: #0b0a07;
+  color: #0b0a07; /* ✅ everything black */
   display:grid;
   place-items:center;
   font-weight: 900;
@@ -255,7 +255,9 @@ h1{ margin:0; font-size: 20px; letter-spacing: 0.2px; }
   font-size: 22px;
   margin-top: 12px;
 }
-.red{ color: #c3342d; }
+
+/* ✅ override red suits so they are ALSO black */
+.red{ color: #0b0a07 !important; }
 
 /* Visual helpers */
 .diagram{
@@ -319,7 +321,7 @@ h1{ margin:0; font-size: 20px; letter-spacing: 0.2px; }
   height: 72px;
 }
 
-/* Card back for “preflop deal” visual */
+/* Card back */
 .backCard{
   width: 52px;
   height: 72px;
@@ -347,12 +349,8 @@ h1{ margin:0; font-size: 20px; letter-spacing: 0.2px; }
   text-align:center;
   font-weight: 900;
 }
-.seat.dealer{
-  border-color: rgba(46,230,200,0.40);
-}
-.seat.sb{
-  border-color: rgba(210,138,59,0.35);
-}
+.seat.dealer{ border-color: rgba(46,230,200,0.40); }
+.seat.sb{ border-color: rgba(210,138,59,0.35); }
 .seat.bb{
   border-color: rgba(210,138,59,0.55);
   box-shadow: 0 0 0 1px rgba(210,138,59,0.12), 0 0 14px var(--glow2);
@@ -472,7 +470,7 @@ h1{ margin:0; font-size: 20px; letter-spacing: 0.2px; }
 .rank-name{ font-weight: 900; }
 .rank-desc{ margin-top: 6px; color: var(--muted); font-size: 13px; line-height: 1.4; }
 
-/* ✅ Footer never overlaps */
+/* Footer */
 .foot{
   border-top: 1px solid var(--line);
   padding: 18px;
@@ -488,21 +486,13 @@ h1{ margin:0; font-size: 20px; letter-spacing: 0.2px; }
   .card{ grid-column: span 12; }
   .rank-layout{ grid-template-columns: 1fr; }
 
-  .diagram{
-    grid-template-columns: 1fr;
-  }
+  .diagram{ grid-template-columns: 1fr; }
   .diagram-arrow{ display:none; }
 
-  .reveal{
-    grid-template-columns: 1fr;
-  }
-
-  .pos-grid{
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .reveal{ grid-template-columns: 1fr; }
+  .pos-grid{ grid-template-columns: repeat(3, 1fr); }
 }
 
-/* extra small phones */
 @media (max-width: 420px){
   h1{ font-size: 18px; }
   .top p{ font-size: 12px; }
