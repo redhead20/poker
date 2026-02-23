@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Texas Hold’em Trainer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <div class="chip">♠</div>
+      <div>
+        <h1>Texas Hold’em Trainer</h1>
+        <p>Interactive learning + dealing practice + hand rankings reference.</p>
+      </div>
+    </div>
+
+    <nav class="tabs" aria-label="Sections">
+      <button class="tab active" data-view="learn">Learn</button>
+      <button class="tab" data-view="practice">Practice</button>
+      <button class="tab" data-view="rankings">Hand Rankings</button>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <!-- LEARN -->
+    <section class="view active" id="learn" aria-labelledby="learnTitle">
+      <h2 id="learnTitle">How Texas Hold’em Works</h2>
+      <p class="sub">Think: <strong>2 hole cards</strong> + <strong>5 community cards</strong> → pick the <strong>best 5-card hand</strong>.</p>
+
+      <!-- NEW: Visual #1 - 2 + 5 -> Best 5 -->
+      <div class="big-card">
+        <h3>Visual: Your cards + Board cards</h3>
+        <p class="sub">You always end with the best 5-card hand you can make from these 7.</p>
+
+        <div class="diagram">
+          <div class="diagram-block">
+            <div class="diagram-title">Your hole cards (private)</div>
+            <div class="hand demo">
+              <div class="cardUI"><div class="small">A♠</div><div class="suit">♠</div></div>
+              <div class="cardUI red"><div class="small">10♥</div><div class="suit">♥</div></div>
+            </div>
+            <div class="diagram-note">Only you see these until showdown.</div>
+          </div>
+
+          <div class="diagram-arrow" aria-hidden="true">+</div>
+
+          <div class="diagram-block">
+            <div class="diagram-title">Community board (shared)</div>
+            <div class="hand demo">
+              <div class="cardUI red"><div class="small">K♦</div><div class="suit">♦</div></div>
+              <div class="cardUI"><div class="small">Q♣</div><div class="suit">♣</div></div>
+              <div class="cardUI"><div class="small">J♠</div><div class="suit">♠</div></div>
+              <div class="cardUI"><div class="small">2♠</div><div class="suit">♠</div></div>
+              <div class="cardUI red"><div class="small">7♥</div><div class="suit">♥</div></div>
+            </div>
+            <div class="diagram-note">Everyone uses the same board cards.</div>
+          </div>
+
+          <div class="diagram-arrow" aria-hidden="true">→</div>
+
+          <div class="diagram-block highlight">
+            <div class="diagram-title">Best 5-card hand</div>
+            <div class="pill-row">
+              <span class="pill strong">Pick the best 5</span>
+              <span class="pill">You can use 0, 1, or 2 hole cards</span>
+            </div>
+            <div class="diagram-note">Example: A-K-Q-J-10 would be a straight (or royal flush if same suit).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Original Learn Cards -->
+      <div class="cards-grid" style="margin-top:12px;">
+        <article class="card">
+          <h3>Goal</h3>
+          <p>Make the best <strong>5-card</strong> poker hand using any combo of your <strong>2 hole cards</strong> + the <strong>5 community cards</strong>.</p>
+          <div class="mini">
+            <span class="pill">You: 2 cards</span>
+            <span class="pill">Board: 5 cards</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Rounds</h3>
+          <ol class="steps">
+            <li><strong>Preflop</strong> – everyone gets 2 cards, betting starts</li>
+            <li><strong>Flop</strong> – 3 community cards, betting</li>
+            <li><strong>Turn</strong> – 4th community card, betting</li>
+            <li><strong>River</strong> – 5th community card, betting</li>
+            <li><strong>Showdown</strong> – best hand wins</li>
+          </ol>
+        </article>
+
+        <article class="card">
+          <h3>Table Actions</h3>
+          <div class="grid2">
+            <div>
+              <p><strong>Check</strong> (0 chips)</p>
+              <p><strong>Bet</strong> (first money in)</p>
+              <p><strong>Call</strong> (match bet)</p>
+            </div>
+            <div>
+              <p><strong>Raise</strong> (increase bet)</p>
+              <p><strong>Fold</strong> (quit hand)</p>
+              <p><strong>All-in</strong> (all chips)</p>
+            </div>
+          </div>
+          <p class="hint">You can only <strong>check</strong> if nobody has bet yet that round.</p>
+        </article>
+
+        <article class="card">
+          <h3>Blinds</h3>
+          <p><strong>Small Blind</strong> and <strong>Big Blind</strong> are forced bets before cards are played. They create action so the pot grows.</p>
+          <p class="hint">Preflop action starts left of the Big Blind.</p>
+        </article>
+      </div>
+
+      <!-- NEW: Visual #2 - Blinds / Positions -->
+      <div class="big-card" style="margin-top:14px;">
+        <h3>Visual: Positions & Blinds</h3>
+        <p class="sub">Action moves clockwise. Blinds post money first; preflop action starts left of the Big Blind.</p>
+
+        <div class="pos-grid" role="img" aria-label="Simple table map of positions">
+          <div class="seat">UTG</div>
+          <div class="seat">MP</div>
+          <div class="seat">CO</div>
+          <div class="seat dealer">BTN <span class="dot">D</span></div>
+          <div class="seat sb">SB</div>
+          <div class="seat bb">BB</div>
+        </div>
+
+        <div class="mini" style="margin-top:10px;">
+          <span class="pill">BTN = Dealer Button</span>
+          <span class="pill">SB posts small blind</span>
+          <span class="pill">BB posts big blind</span>
+          <span class="pill strong">First to act preflop: UTG</span>
+        </div>
+      </div>
+
+      <!-- NEW: Visual #3 - Reveal Timeline -->
+      <div class="big-card" style="margin-top:14px;">
+        <h3>Visual: The board reveals</h3>
+        <p class="sub">This is how the community cards come out.</p>
+
+        <div class="reveal">
+          <div class="reveal-step">
+            <div class="reveal-title">Preflop</div>
+            <div class="reveal-cards">
+              <div class="backCard" aria-hidden="true"></div>
+              <div class="backCard" aria-hidden="true"></div>
+            </div>
+            <div class="reveal-note">2 cards to each player</div>
+          </div>
+
+          <div class="reveal-step">
+            <div class="reveal-title">Flop</div>
+            <div class="reveal-cards">
+              <div class="cardUI red"><div class="small">K♦</div><div class="suit">♦</div></div>
+              <div class="cardUI"><div class="small">Q♣</div><div class="suit">♣</div></div>
+              <div class="cardUI"><div class="small">J♠</div><div class="suit">♠</div></div>
+            </div>
+            <div class="reveal-note">3 community cards</div>
+          </div>
+
+          <div class="reveal-step">
+            <div class="reveal-title">Turn</div>
+            <div class="reveal-cards">
+              <div class="cardUI"><div class="small">2♠</div><div class="suit">♠</div></div>
+            </div>
+            <div class="reveal-note">4th community card</div>
+          </div>
+
+          <div class="reveal-step">
+            <div class="reveal-title">River</div>
+            <div class="reveal-cards">
+              <div class="cardUI red"><div class="small">7♥</div><div class="suit">♥</div></div>
+            </div>
+            <div class="reveal-note">5th community card</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clickable walkthrough (kept) -->
+      <div class="big-card" style="margin-top:14px;">
+        <h3>Round walkthrough (clickable)</h3>
+        <p class="sub">Tap each step to see what happens.</p>
+
+        <div class="timeline" role="tablist" aria-label="Hold'em rounds">
+          <button class="tstep active" data-step="preflop" role="tab">Preflop</button>
+          <button class="tstep" data-step="flop" role="tab">Flop</button>
+          <button class="tstep" data-step="turn" role="tab">Turn</button>
+          <button class="tstep" data-step="river" role="tab">River</button>
+          <button class="tstep" data-step="showdown" role="tab">Showdown</button>
+        </div>
+
+        <div class="panel" id="learnPanel" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- PRACTICE -->
+    <section class="view" id="practice" aria-labelledby="practiceTitle">
+      <div class="split">
+        <div>
+          <h2 id="practiceTitle">Practice: Deal & Evaluate</h2>
+          <p class="sub">Deal a random hand and board, then see what your best hand is.</p>
+
+          <div class="table">
+            <div class="row">
+              <div class="label">Your hole cards</div>
+              <div class="hand" id="hole"></div>
+            </div>
+
+            <div class="row">
+              <div class="label">Community board</div>
+              <div class="hand" id="board"></div>
+            </div>
+
+            <div class="controls">
+              <button class="btn" id="newHand">New Hand</button>
+              <button class="btn" id="dealFlop" disabled>Deal Flop</button>
+              <button class="btn" id="dealTurn" disabled>Deal Turn</button>
+              <button class="btn" id="dealRiver" disabled>Deal River</button>
+              <button class="btn ghost" id="reset">Reset</button>
+            </div>
+
+            <div class="results">
+              <div class="result">
+                <div class="result-title">Best Hand</div>
+                <div class="result-value" id="bestHand">—</div>
+              </div>
+              <div class="result">
+                <div class="result-title">Made Hand Strength</div>
+                <div class="result-value" id="strength">—</div>
+              </div>
+              <div class="result">
+                <div class="result-title">Estimated Outs</div>
+                <div class="result-value" id="outs">—</div>
+              </div>
+            </div>
+
+            <p class="hint">Outs are approximate: flush draw ≈ 9, open-ender ≈ 8, gutshot ≈ 4.</p>
+          </div>
+        </div>
+
+        <aside class="side">
+          <h3>Quick concepts</h3>
+          <div class="mini">
+            <span class="pill">Pocket Pair</span>
+            <span class="pill">Top Pair</span>
+            <span class="pill">Overcards</span>
+            <span class="pill">Flush Draw</span>
+            <span class="pill">Open-Ended</span>
+            <span class="pill">Gutshot</span>
+          </div>
+
+          <div class="big-card" style="margin-top:12px;">
+            <h3>Try this</h3>
+            <ul class="bullets">
+              <li>Deal a new hand.</li>
+              <li>Guess your best hand after the flop.</li>
+              <li>Deal turn + river and see how it changes.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- HAND RANKINGS -->
+    <section class="view" id="rankings" aria-labelledby="rankTitle">
+      <h2 id="rankTitle">Hand Rankings</h2>
+      <p class="sub">Click any hand to load a real example (hole cards + board).</p>
+
+      <div class="rank-layout">
+        <div class="rank-list" id="rankList" aria-label="Hand ranking list"></div>
+
+        <div class="rank-preview">
+          <div class="table">
+            <div class="row">
+              <div class="label">Example hole cards</div>
+              <div class="hand" id="exHole"></div>
+            </div>
+
+            <div class="row">
+              <div class="label">Example board</div>
+              <div class="hand" id="exBoard"></div>
+            </div>
+
+            <div class="results">
+              <div class="result" style="grid-column: span 3;">
+                <div class="result-title">This example is</div>
+                <div class="result-value" id="exName">—</div>
+              </div>
+            </div>
+
+            <p class="hint">Your final hand is the best 5 cards you can make from the 7 available.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Texas Hold’em Trainer — learn, practice, and memorize hand rankings.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
