@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Texas Hold’em Trainer</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <header class="top">
-    <div class="brand">
+    <div class="brand" id="homeButton">
       <div class="chip">♠</div>
       <div>
         <h1>Texas Hold’em Trainer</h1>
@@ -27,7 +29,8 @@
     <!-- LEARN -->
     <section class="view active" id="learn" aria-labelledby="learnTitle">
       <h2 id="learnTitle">How Texas Hold’em Works</h2>
-      <p class="sub">Think: <strong>2 hole cards</strong> + <strong>5 community cards</strong> → pick the <strong>best 5-card hand</strong>.</p>
+      <p class="sub">Think: <strong>2 hole cards</strong> + <strong>5 community cards</strong> → pick the <strong>best
+          5-card hand</strong>.</p>
 
       <!-- NEW: Visual #1 - 2 + 5 -> Best 5 -->
       <div class="big-card">
@@ -38,8 +41,14 @@
           <div class="diagram-block">
             <div class="diagram-title">Your hole cards (private)</div>
             <div class="hand demo">
-              <div class="cardUI"><div class="small">A♠</div><div class="suit">♠</div></div>
-              <div class="cardUI red"><div class="small">10♥</div><div class="suit">♥</div></div>
+              <div class="cardUI">
+                <div class="small">A♠</div>
+                <div class="suit">♠</div>
+              </div>
+              <div class="cardUI red">
+                <div class="small">10♥</div>
+                <div class="suit">♥</div>
+              </div>
             </div>
             <div class="diagram-note">Only you see these until showdown.</div>
           </div>
@@ -49,11 +58,26 @@
           <div class="diagram-block">
             <div class="diagram-title">Community board (shared)</div>
             <div class="hand demo">
-              <div class="cardUI red"><div class="small">K♦</div><div class="suit">♦</div></div>
-              <div class="cardUI"><div class="small">Q♣</div><div class="suit">♣</div></div>
-              <div class="cardUI"><div class="small">J♠</div><div class="suit">♠</div></div>
-              <div class="cardUI"><div class="small">2♠</div><div class="suit">♠</div></div>
-              <div class="cardUI red"><div class="small">7♥</div><div class="suit">♥</div></div>
+              <div class="cardUI red">
+                <div class="small">K♦</div>
+                <div class="suit">♦</div>
+              </div>
+              <div class="cardUI">
+                <div class="small">Q♣</div>
+                <div class="suit">♣</div>
+              </div>
+              <div class="cardUI">
+                <div class="small">J♠</div>
+                <div class="suit">♠</div>
+              </div>
+              <div class="cardUI">
+                <div class="small">2♠</div>
+                <div class="suit">♠</div>
+              </div>
+              <div class="cardUI red">
+                <div class="small">7♥</div>
+                <div class="suit">♥</div>
+              </div>
             </div>
             <div class="diagram-note">Everyone uses the same board cards.</div>
           </div>
@@ -75,7 +99,8 @@
       <div class="cards-grid" style="margin-top:12px;">
         <article class="card">
           <h3>Goal</h3>
-          <p>Make the best <strong>5-card</strong> poker hand using any combo of your <strong>2 hole cards</strong> + the <strong>5 community cards</strong>.</p>
+          <p>Make the best <strong>5-card</strong> poker hand using any combo of your <strong>2 hole cards</strong> +
+            the <strong>5 community cards</strong>.</p>
           <div class="mini">
             <span class="pill">You: 2 cards</span>
             <span class="pill">Board: 5 cards</span>
@@ -112,7 +137,8 @@
 
         <article class="card">
           <h3>Blinds</h3>
-          <p><strong>Small Blind</strong> and <strong>Big Blind</strong> are forced bets before cards are played. They create action so the pot grows.</p>
+          <p><strong>Small Blind</strong> and <strong>Big Blind</strong> are forced bets before cards are played. They
+            create action so the pot grows.</p>
           <p class="hint">Preflop action starts left of the Big Blind.</p>
         </article>
       </div>
@@ -120,22 +146,21 @@
       <!-- NEW: Visual #2 - Blinds / Positions -->
       <div class="big-card" style="margin-top:14px;">
         <h3>Visual: Positions & Blinds</h3>
-        <p class="sub">Action moves clockwise. Blinds post money first; preflop action starts left of the Big Blind.</p>
+        <p class="sub">Click a position to learn what it means.</p>
 
-        <div class="pos-grid" role="img" aria-label="Simple table map of positions">
-          <div class="seat">UTG</div>
-          <div class="seat">MP</div>
-          <div class="seat">CO</div>
-          <div class="seat dealer">BTN <span class="dot">D</span></div>
-          <div class="seat sb">SB</div>
-          <div class="seat bb">BB</div>
+        <div class="pos-buttons">
+
+          <button class="pos-btn" data-pos="utg">UTG</button>
+          <button class="pos-btn" data-pos="mp">MP</button>
+          <button class="pos-btn" data-pos="co">CO</button>
+          <button class="pos-btn" data-pos="btn">BTN</button>
+          <button class="pos-btn" data-pos="sb">SB</button>
+          <button class="pos-btn" data-pos="bb">BB</button>
+
         </div>
 
-        <div class="mini" style="margin-top:10px;">
-          <span class="pill">BTN = Dealer Button</span>
-          <span class="pill">SB posts small blind</span>
-          <span class="pill">BB posts big blind</span>
-          <span class="pill strong">First to act preflop: UTG</span>
+        <div class="pos-info" id="posInfo">
+          Click a position to see how it works.
         </div>
       </div>
 
@@ -157,9 +182,18 @@
           <div class="reveal-step">
             <div class="reveal-title">Flop</div>
             <div class="reveal-cards">
-              <div class="cardUI red"><div class="small">K♦</div><div class="suit">♦</div></div>
-              <div class="cardUI"><div class="small">Q♣</div><div class="suit">♣</div></div>
-              <div class="cardUI"><div class="small">J♠</div><div class="suit">♠</div></div>
+              <div class="cardUI red">
+                <div class="small">K♦</div>
+                <div class="suit">♦</div>
+              </div>
+              <div class="cardUI">
+                <div class="small">Q♣</div>
+                <div class="suit">♣</div>
+              </div>
+              <div class="cardUI">
+                <div class="small">J♠</div>
+                <div class="suit">♠</div>
+              </div>
             </div>
             <div class="reveal-note">3 community cards</div>
           </div>
@@ -167,7 +201,10 @@
           <div class="reveal-step">
             <div class="reveal-title">Turn</div>
             <div class="reveal-cards">
-              <div class="cardUI"><div class="small">2♠</div><div class="suit">♠</div></div>
+              <div class="cardUI">
+                <div class="small">2♠</div>
+                <div class="suit">♠</div>
+              </div>
             </div>
             <div class="reveal-note">4th community card</div>
           </div>
@@ -175,7 +212,10 @@
           <div class="reveal-step">
             <div class="reveal-title">River</div>
             <div class="reveal-cards">
-              <div class="cardUI red"><div class="small">7♥</div><div class="suit">♥</div></div>
+              <div class="cardUI red">
+                <div class="small">7♥</div>
+                <div class="suit">♥</div>
+              </div>
             </div>
             <div class="reveal-note">5th community card</div>
           </div>
@@ -307,4 +347,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

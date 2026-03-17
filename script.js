@@ -44,7 +44,7 @@ function cardToUI(card) {
 function byValueDesc(a, b) { return b - a; }
 
 function valueToRank(v) {
-  const map = {14:"A",13:"K",12:"Q",11:"J",10:"10",9:"9",8:"8",7:"7",6:"6",5:"5",4:"4",3:"3",2:"2"};
+  const map = { 14: "A", 13: "K", 12: "Q", 11: "J", 10: "10", 9: "9", 8: "8", 7: "7", 6: "6", 5: "5", 4: "4", 3: "3", 2: "2" };
   return map[v] || String(v);
 }
 
@@ -55,8 +55,8 @@ function parseCard(code) {
   const suitChar = txt.slice(-1).toLowerCase();
   const rankPart = txt.slice(0, -1).toUpperCase(); // "A" or "10" or "T"
 
-  const suitMap = { s:"♠", h:"♥", d:"♦", c:"♣" };
-  const rankMap = { A:14, K:13, Q:12, J:11, "10":10, T:10, "9":9, "8":8, "7":7, "6":6, "5":5, "4":4, "3":3, "2":2 };
+  const suitMap = { s: "♠", h: "♥", d: "♦", c: "♣" };
+  const rankMap = { A: 14, K: 13, Q: 12, J: 11, "10": 10, T: 10, "9": 9, "8": 8, "7": 7, "6": 6, "5": 5, "4": 4, "3": 3, "2": 2 };
 
   const suitSym = suitMap[suitChar];
   const value = rankMap[rankPart];
@@ -311,7 +311,7 @@ function estimateOuts(cards) {
 
   let best = null;
   for (let start = 1; start <= 10; start++) {
-    const run = [start, start+1, start+2, start+3, start+4];
+    const run = [start, start + 1, start + 2, start + 3, start + 4];
     const have = run.filter(v => uniq2.includes(v)).length;
     if (have === 4) {
       const missing = run.filter(v => !uniq2.includes(v))[0];
@@ -334,23 +334,23 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       name: "Royal Flush",
       desc: "10-J-Q-K-A, same suit. Best possible hand.",
-      hole: ["As","Ks"],
-      board: ["Qs","Js","10s","2d","9c"]
+      hole: ["As", "Ks"],
+      board: ["Qs", "Js", "10s", "2d", "9c"]
     },
     {
       name: "Straight Flush",
       desc: "Five in a row, same suit (not royal).",
-      hole: ["9h","8h"],
-      board: ["7h","6h","5h","Qd","2c"]
+      hole: ["9h", "8h"],
+      board: ["7h", "6h", "5h", "Qd", "2c"]
     },
-    { name: "Four of a Kind", desc: "Four cards of the same rank.", hole: ["Ah","Ac"], board: ["Ad","As","7c","2s","9d"] },
-    { name: "Full House", desc: "Three of a kind + a pair.", hole: ["Kh","Kd"], board: ["Kc","7s","7d","2c","9h"] },
-    { name: "Flush", desc: "Five cards same suit (not in order).", hole: ["Ah","2h"], board: ["Kh","9h","6h","Qs","3d"] },
-    { name: "Straight", desc: "Five in a row (mixed suits).", hole: ["9s","8d"], board: ["7c","6h","5s","Qd","2c"] },
-    { name: "Three of a Kind", desc: "Three cards of the same rank.", hole: ["Jc","Jh"], board: ["Jd","7s","2c","9h","Qd"] },
-    { name: "Two Pair", desc: "Two different pairs.", hole: ["Ah","Ad"], board: ["Ks","Kd","7c","2s","9d"] },
-    { name: "One Pair", desc: "One pair + three kickers.", hole: ["Qh","Qs"], board: ["7d","2c","9h","Kd","3s"] },
-    { name: "High Card", desc: "No made hand — highest card plays.", hole: ["As","9d"], board: ["Kd","7c","4h","2s","8c"] }
+    { name: "Four of a Kind", desc: "Four cards of the same rank.", hole: ["Ah", "Ac"], board: ["Ad", "As", "7c", "2s", "9d"] },
+    { name: "Full House", desc: "Three of a kind + a pair.", hole: ["Kh", "Kd"], board: ["Kc", "7s", "7d", "2c", "9h"] },
+    { name: "Flush", desc: "Five cards same suit (not in order).", hole: ["Ah", "2h"], board: ["Kh", "9h", "6h", "Qs", "3d"] },
+    { name: "Straight", desc: "Five in a row (mixed suits).", hole: ["9s", "8d"], board: ["7c", "6h", "5s", "Qd", "2c"] },
+    { name: "Three of a Kind", desc: "Three cards of the same rank.", hole: ["Jc", "Jh"], board: ["Jd", "7s", "2c", "9h", "Qd"] },
+    { name: "Two Pair", desc: "Two different pairs.", hole: ["Ah", "Ad"], board: ["Ks", "Kd", "7c", "2s", "9d"] },
+    { name: "One Pair", desc: "One pair + three kickers.", hole: ["Qh", "Qs"], board: ["7d", "2c", "9h", "Kd", "3s"] },
+    { name: "High Card", desc: "No made hand — highest card plays.", hole: ["As", "9d"], board: ["Kd", "7c", "4h", "2s", "8c"] }
   ];
 
   function loadExample(i) {
@@ -385,6 +385,50 @@ document.addEventListener("DOMContentLoaded", () => {
       rankListEl.appendChild(div);
     });
   }
+
+  const posInfo = document.getElementById("posInfo");
+
+  const posDescriptions = {
+    utg: "UTG (Under the Gun): The first player to act preflop. This is an early position and usually requires strong starting hands.",
+
+    mp: "MP (Middle Position): Players acting after UTG. You can play slightly more hands than UTG but still need solid cards.",
+
+    co: "CO (Cutoff): The player right before the dealer. This is a strong position and often used to steal blinds.",
+
+    btn: "BTN (Button / Dealer): The best position in poker. You act last on every post-flop betting round.",
+
+    sb: "SB (Small Blind): Posts the small blind before cards are dealt. Acts second-to-last preflop but first after the flop.",
+
+    bb: "BB (Big Blind): Posts the big blind. Acts last preflop but first on all later betting rounds."
+  };
+
+  document.querySelectorAll(".pos-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const pos = btn.dataset.pos;
+      posInfo.textContent = posDescriptions[pos];
+    });
+  });
+
+  const homeButton = document.getElementById("homeButton");
+
+  homeButton.addEventListener("click", () => {
+
+    // remove active tab
+    document.querySelectorAll(".tab").forEach(tab => {
+      tab.classList.remove("active");
+    });
+
+    // activate learn tab
+    document.querySelector('[data-view="learn"]').classList.add("active");
+
+    // hide all pages
+    document.querySelectorAll(".view").forEach(view => {
+      view.classList.remove("active");
+    });
+
+    // show learn page
+    document.getElementById("learn").classList.add("active");
+  });
 
   buildRankingList();
   loadExample(0);
