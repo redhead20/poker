@@ -226,38 +226,52 @@ h1{ margin:0; font-size: 20px; letter-spacing: 0.2px; }
   width: 58px;
   height: 80px;
   border-radius: 14px;
+
+  /* DARK CARD BACKGROUND */
   background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.96), rgba(255,255,255,0.80) 45%, rgba(255,255,255,0.92));
-  color: #0b0a07; /* ✅ everything black */
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.08), transparent 50%),
+    linear-gradient(160deg, #111111, #020202);
+
+  color: #ffffff; /* white text */
+
   display:grid;
   place-items:center;
   font-weight: 900;
   position: relative;
+
+  border:1px solid rgba(255,255,255,0.15);
+
   box-shadow:
-    0 14px 22px rgba(0,0,0,0.35),
-    0 0 0 1px rgba(0,0,0,0.06);
+    0 14px 22px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.05),
+    0 0 16px rgba(46,230,200,0.15);
 }
+
 .cardUI::after{
   content:"";
   position:absolute;
-  inset: -2px;
-  border-radius: 16px;
-  background: radial-gradient(220px 90px at 50% 0%, rgba(46,230,200,0.14), transparent 60%);
+  inset:-2px;
+  border-radius:16px;
+  background:
+    radial-gradient(220px 90px at 50% 0%, rgba(46,230,200,0.15), transparent 60%);
   pointer-events:none;
 }
+
 .cardUI .small{
   position:absolute;
-  top: 8px;
-  left: 10px;
-  font-size: 13px;
-}
-.cardUI .suit{
-  font-size: 22px;
-  margin-top: 12px;
+  top:8px;
+  left:10px;
+  font-size:13px;
 }
 
-/* ✅ override red suits so they are ALSO black */
-.red{ color: #0b0a07 !important; }
+.cardUI .suit{
+  font-size:22px;
+  margin-top:12px;
+}
+
+.red{
+  color:#ff4a4a;
+}
 
 /* Visual helpers */
 .diagram{
