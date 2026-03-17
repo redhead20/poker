@@ -33,7 +33,7 @@ function shuffle(arr) {
 
 function cardToUI(card) {
   const div = document.createElement("div");
-  div.className = "cardUI"; // ✅ no more red class at all
+  div.className = `cardUI ${card.color === "red" ? "red" : ""}`;
   div.innerHTML = `
     <div class="small">${card.rank}${card.suit}</div>
     <div class="suit">${card.suit}</div>
