@@ -1,0 +1,129 @@
+Web site plan
+Learn PAGE
+┌───────────────────────────────────────────────┐
+│  ♠ Texas Hold’em Trainer                      │
+│  [Learn] [Practice] [Hand Rankings]           │
+└───────────────────────────────────────────────┘
+
+               PAGE TITLE
+        "How Texas Hold’em Works"
+        short description text
+
+┌───────────────────────────────────────────────┐
+│ VISUAL: Your Cards + Board Cards              │
+│                                               │
+│ [Hole Cards]   +   [Board Cards]   →  [Result]│
+│                                               │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────┬───────────────────────┐
+│ Goal                  │ Rounds                │
+│ - 2 cards + 5 cards   │ 1. Preflop            │
+│                       │ 2. Flop               │
+│                       │ 3. Turn               │
+│                       │ 4. River              │
+└───────────────────────┴───────────────────────┘
+
+┌───────────────────────┬───────────────────────┐
+│ Table Actions         │ Blinds                │
+│ - Check               │ - Small Blind         │
+│ - Bet                 │ - Big Blind           │
+│ - Raise               │                       │
+└───────────────────────┴───────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│ VISUAL: Positions & Blinds                    │
+│                                               │
+│ [UTG] [MP] [CO] [BTN] [SB] [BB]               │
+│                                               │
+│ → Info box (changes when clicked)             │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│ VISUAL: Board Reveals                         │
+│                                               │
+│ [Preflop] [Flop] [Turn] [River]               │
+│ (card visuals under each)                     │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│ Round Walkthrough (Clickable)                 │
+│                                               │
+│ [Preflop] [Flop] [Turn] [River] [Showdown]    │
+│                                               │
+│ → Explanation box                             │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│ Footer                                        │
+└───────────────────────────────────────────────┘
+
+
+
+
+
+Practice PAGE
+┌───────────────────────────────────────────────┐
+│ ♠ Texas Hold’em Trainer                       │
+│ [Learn] [Practice] [Hand Rankings]            │
+└───────────────────────────────────────────────┘
+
+            PAGE TITLE
+     "Practice: Deal & Evaluate"
+
+┌───────────────────────────────────────────────┐
+│ Your hole cards                               │
+│ [Card] [Card]                                 │
+│                                               │
+│ Community board                               │
+│ [Card][Card][Card][Card][Card]                │
+│                                               │
+│ [New Hand] [Flop] [Turn] [River] [Reset]      │
+│                                               │
+│ Best Hand        | Strength | Outs            │
+│     —            |    —     |   —             │
+└───────────────────────────────────────────────┘
+
+┌──────────────────────────────┐
+│ SIDE PANEL                   │
+│                              │
+│ Quick Concepts               │
+│ [Pocket Pair] [Top Pair]     │
+│ [Flush Draw] [Gutshot]       │
+│                              │
+│ Try This                     │
+│ • Deal a hand                │
+│ • Guess best hand            │
+│ • Reveal cards               │
+└──────────────────────────────┘
+
+
+
+
+
+Hand Rankings PAGE
+┌───────────────────────────────────────────────┐
+│ ♠ Texas Hold’em Trainer                      │
+│ [Learn] [Practice] [Hand Rankings]           │
+└───────────────────────────────────────────────┘
+
+                 PAGE TITLE
+              "Hand Rankings"
+     short description / instructions
+
+┌───────────────────────┬───────────────────────┐
+│ HAND LIST             │ EXAMPLE DISPLAY       │
+│                       │                       │
+│ 1. Royal Flush        │ Example hole cards    │
+│ 2. Straight Flush     │ [Card] [Card]         │
+│ 3. Four of a Kind     │                       │
+│ 4. Full House         │ Example board         │
+│ 5. Flush              │ [Card][Card][Card...] │
+│ 6. Straight           │                       │
+│ 7. Three of a Kind    │ Result text           │
+│ 8. Two Pair           │ "Royal Flush..."      │
+│ 9. One Pair           │                       │
+│ 10. High Card         │ Explanation text      │
+│                       │                       │
+│ (clickable items)     │ (updates dynamically) │
+└───────────────────────┴───────────────────────┘
