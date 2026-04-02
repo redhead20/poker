@@ -1,4 +1,4 @@
-// ---------- Utilities ----------
+// Utilities
 const SUITS = [
   { s: "♠", color: "black" },
   { s: "♥", color: "red" },
@@ -66,11 +66,11 @@ function cardToUI(card) {
 function byValueDesc(a, b) { return b - a; }
 
 function valueToRank(v) {
-  const map = {14:"A",13:"K",12:"Q",11:"J",10:"10",9:"9",8:"8",7:"7",6:"6",5:"5",4:"4",3:"3",2:"2"};
+  const map = { 14: "A", 13: "K", 12: "Q", 11: "J", 10: "10", 9: "9", 8: "8", 7: "7", 6: "6", 5: "5", 4: "4", 3: "3", 2: "2" };
   return map[v];
 }
 
-// ---------- Tabs ----------
+// Tabs 
 const tabs = document.querySelectorAll(".tab");
 const views = document.querySelectorAll(".view");
 
@@ -84,7 +84,7 @@ tabs.forEach(btn => {
   });
 });
 
-// ---------- Learn ----------
+// Learn
 const learnPanel = document.getElementById("learnPanel");
 const tsteps = document.querySelectorAll(".tstep");
 
@@ -105,7 +105,7 @@ function setLearnStep(step) {
 setLearnStep("preflop");
 tsteps.forEach(b => b.addEventListener("click", () => setLearnStep(b.dataset.step)));
 
-// ---------- Practice ----------
+// Practice
 const holeEl = document.getElementById("hole");
 const boardEl = document.getElementById("board");
 
@@ -187,17 +187,17 @@ btnRiver.addEventListener("click", () => {
 
 resetState();
 
-// ---------- Hand Evaluation ----------
+// Hand Evaluation
 function evaluateBestHand(cards) {
-  const values = cards.map(c => c.value).sort((a,b)=>b-a);
+  const values = cards.map(c => c.value).sort((a, b) => b - a);
 
   // Count occurrences
   const counts = {};
-  values.forEach(v => counts[v] = (counts[v]||0)+1);
+  values.forEach(v => counts[v] = (counts[v] || 0) + 1);
 
   const groups = Object.entries(counts)
-    .map(([v,n]) => ({v:Number(v), n}))
-    .sort((a,b)=>b.n-a.n || b.v-a.v);
+    .map(([v, n]) => ({ v: Number(v), n }))
+    .sort((a, b) => b.n - a.n || b.v - a.v);
 
   // Check flush
   const suitCounts = {};
@@ -207,20 +207,20 @@ function evaluateBestHand(cards) {
 
   const flushSuit = Object.keys(suitCounts).find(s => suitCounts[s] >= 5);
   const flushCards = flushSuit
-    ? cards.filter(c => c.suit === flushSuit).map(c=>c.value).sort((a,b)=>b-a)
+    ? cards.filter(c => c.suit === flushSuit).map(c => c.value).sort((a, b) => b - a)
     : null;
 
   // Check straight
   function isStraight(vals) {
-    const uniq = [...new Set(vals)].sort((a,b)=>b-a);
+    const uniq = [...new Set(vals)].sort((a, b) => b - a);
 
     // Wheel (A-2-3-4-5)
-    if ([14,5,4,3,2].every(v => uniq.includes(v))) return 5;
+    if ([14, 5, 4, 3, 2].every(v => uniq.includes(v))) return 5;
 
-    for (let i=0;i<=uniq.length-5;i++) {
+    for (let i = 0; i <= uniq.length - 5; i++) {
       let ok = true;
-      for (let j=1;j<5;j++) {
-        if (uniq[i+j] !== uniq[i]-j) ok=false;
+      for (let j = 1; j < 5; j++) {
+        if (uniq[i + j] !== uniq[i] - j) ok = false;
       }
       if (ok) return uniq[i];
     }
@@ -234,58 +234,58 @@ function evaluateBestHand(cards) {
     const sfHigh = isStraight(flushCards);
     if (sfHigh) {
       if (sfHigh === 14) {
-        return {name:"Royal Flush", detail:"10-J-Q-K-A same suit"};
+        return { name: "Royal Flush", detail: "10-J-Q-K-A same suit" };
       }
-      return {name:"Straight Flush", detail:`to ${valueToRank(sfHigh)}`};
+      return { name: "Straight Flush", detail: `to ${valueToRank(sfHigh)}` };
     }
   }
 
   // Four of a kind
   if (groups[0]?.n === 4) {
-    return {name:"Four of a Kind", detail:`${valueToRank(groups[0].v)}s`};
+    return { name: "Four of a Kind", detail: `${valueToRank(groups[0].v)}s` };
   }
 
   // Full house
   if (groups[0]?.n === 3 && groups[1]?.n >= 2) {
     return {
-      name:"Full House",
-      detail:`${valueToRank(groups[0].v)}s full of ${valueToRank(groups[1].v)}s`
+      name: "Full House",
+      detail: `${valueToRank(groups[0].v)}s full of ${valueToRank(groups[1].v)}s`
     };
   }
 
   // Flush
   if (flushCards) {
-    return {name:"Flush", detail:`high ${valueToRank(flushCards[0])}`};
+    return { name: "Flush", detail: `high ${valueToRank(flushCards[0])}` };
   }
 
   // Straight
   if (straightHigh) {
-    return {name:"Straight", detail:`to ${valueToRank(straightHigh)}`};
+    return { name: "Straight", detail: `to ${valueToRank(straightHigh)}` };
   }
 
   // Trips
   if (groups[0]?.n === 3) {
-    return {name:"Three of a Kind", detail:`${valueToRank(groups[0].v)}s`};
+    return { name: "Three of a Kind", detail: `${valueToRank(groups[0].v)}s` };
   }
 
   // Two pair
   if (groups[0]?.n === 2 && groups[1]?.n === 2) {
     return {
-      name:"Two Pair",
-      detail:`${valueToRank(groups[0].v)} & ${valueToRank(groups[1].v)}`
+      name: "Two Pair",
+      detail: `${valueToRank(groups[0].v)} & ${valueToRank(groups[1].v)}`
     };
   }
 
   // Pair
   if (groups[0]?.n === 2) {
-    return {name:"One Pair", detail:`${valueToRank(groups[0].v)}s`};
+    return { name: "One Pair", detail: `${valueToRank(groups[0].v)}s` };
   }
 
   // High card
-  return {name:"High Card", detail:valueToRank(values[0])};
+  return { name: "High Card", detail: valueToRank(values[0]) };
 }
 
-// ---------- Rankings ----------
+// Rankings
 document.addEventListener("DOMContentLoaded", () => {
   const rankList = document.getElementById("rankList");
   const exHole = document.getElementById("exHole");
@@ -293,12 +293,56 @@ document.addEventListener("DOMContentLoaded", () => {
   const exName = document.getElementById("exName");
 
   const examples = [
-    {name:"Royal Flush", hole:["As","Ks"], board:["Qs","Js","10s","2d","9c"]},
-    {name:"Straight Flush", hole:["9h","8h"], board:["7h","6h","5h","Qd","2c"]},
-    {name:"Four of a Kind", hole:["Ah","Ac"], board:["Ad","As","7c","2s","9d"]},
-    {name:"Full House", hole:["Kh","Kd"], board:["Kc","7s","7d","2c","9h"]},
-    {name:"Flush", hole:["Ah","2h"], board:["Kh","9h","6h","Qs","3d"]},
-    {name:"Straight", hole:["9s","8d"], board:["7c","6h","5s","Qd","2c"]}
+    {
+      name: "Royal Flush",
+      hole: ["As", "Ks"],
+      board: ["Qs", "Js", "10s", "2d", "9c"]
+    },
+    {
+      name: "Straight Flush",
+      hole: ["9h", "8h"],
+      board: ["7h", "6h", "5h", "Qd", "2c"]
+    },
+    {
+      name: "Four of a Kind",
+      hole: ["Ah", "Ac"],
+      board: ["Ad", "As", "7c", "2s", "9d"]
+    },
+    {
+      name: "Full House",
+      hole: ["Kh", "Kd"],
+      board: ["Kc", "7s", "7d", "2c", "9h"]
+    },
+    {
+      name: "Flush",
+      hole: ["Ah", "2h"],
+      board: ["Kh", "9h", "6h", "Qs", "3d"]
+    },
+    {
+      name: "Straight",
+      hole: ["9s", "8d"],
+      board: ["7c", "6h", "5s", "Qd", "2c"]
+    },
+    {
+      name: "Three of a Kind",
+      hole: ["Jc", "Jh"],
+      board: ["Jd", "7s", "2c", "9h", "Qd"]
+    },
+    {
+      name: "Two Pair",
+      hole: ["Ah", "Ad"],
+      board: ["Ks", "Kd", "7c", "2s", "9d"]
+    },
+    {
+      name: "One Pair",
+      hole: ["Qh", "Qs"],
+      board: ["7d", "2c", "9h", "Kd", "3s"]
+    },
+    {
+      name: "High Card",
+      hole: ["As", "9d"],
+      board: ["Kd", "7c", "4h", "2s", "8c"]
+    }
   ];
 
   function loadExample(i) {
@@ -312,39 +356,39 @@ document.addEventListener("DOMContentLoaded", () => {
     exName.textContent = ex.name;
   }
 
-  examples.forEach((r,i)=>{
+  examples.forEach((r, i) => {
     const div = document.createElement("div");
-    div.className="rank-item";
+    div.className = "rank-item";
     div.textContent = r.name;
-    div.onclick = ()=>loadExample(i);
+    div.onclick = () => loadExample(i);
     rankList.appendChild(div);
   });
 
   loadExample(0);
 });
 
-// ---------- Positions ----------
+// Positions
 const posInfo = document.getElementById("posInfo");
 const posDescriptions = {
-  utg:"First to act",
-  mp:"Middle position",
-  co:"Cutoff",
-  btn:"Dealer (best position)",
-  sb:"Small blind",
-  bb:"Big blind"
+  utg: "First to act",
+  mp: "Middle position",
+  co: "Cutoff",
+  btn: "Dealer (best position)",
+  sb: "Small blind",
+  bb: "Big blind"
 };
 
-document.querySelectorAll(".pos-btn").forEach(btn=>{
-  btn.addEventListener("click",()=>{
+document.querySelectorAll(".pos-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
     posInfo.textContent = posDescriptions[btn.dataset.pos];
   });
 });
 
-// ---------- Home Button ----------
-document.getElementById("homeButton").addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+// Home Button
+document.getElementById("homeButton").addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   document.querySelector('[data-view="learn"]').classList.add("active");
 
-  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
   document.getElementById("learn").classList.add("active");
 });

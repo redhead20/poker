@@ -1,0 +1,172 @@
+START PROGRAM
+
+----------------------------------------
+INITIAL LOAD
+----------------------------------------
+Load webpage
+Set default page to "Learn"
+Display Learn content
+
+----------------------------------------
+NAVIGATION SYSTEM
+----------------------------------------
+WHEN user clicks a tab (Learn, Practice, Rankings):
+    Remove active state from all tabs
+    Add active state to clicked tab
+
+    Hide all pages
+    Show selected page
+
+WHEN user clicks the logo (home button):
+    Switch to Learn page
+    Highlight Learn tab
+
+----------------------------------------
+LEARN PAGE (ROUND WALKTHROUGH)
+----------------------------------------
+Set current step = "preflop"
+
+WHEN user clicks a step (preflop, flop, turn, river, showdown):
+    Remove highlight from all steps
+    Highlight selected step
+
+    Display explanation for selected step
+
+----------------------------------------
+POSITIONS & BLINDS
+----------------------------------------
+WHEN user clicks a position button (UTG, MP, CO, BTN, SB, BB):
+    Get position type
+    Display explanation of that position
+
+----------------------------------------
+PRACTICE MODE SETUP
+----------------------------------------
+Create a deck of 52 cards
+
+FUNCTION makeDeck:
+    FOR each suit (spades, hearts, diamonds, clubs):
+        FOR each rank (2 through Ace):
+            Create card with:
+                rank
+                numeric value
+                suit
+                color (red or black)
+            Add card to deck
+
+FUNCTION shuffleDeck:
+    Randomize order of deck
+
+FUNCTION resetState:
+    Shuffle deck
+    Clear player hand
+    Clear board cards
+
+    Disable flop, turn, river buttons
+    Clear best hand display
+    Clear strength display
+
+----------------------------------------
+DEALING CARDS
+----------------------------------------
+WHEN user clicks "New Hand":
+    Reset state
+    Deal 2 cards to player
+    Enable flop button
+    Display player cards
+
+WHEN user clicks "Flop":
+    Deal 3 cards to board
+    Disable flop button
+    Enable turn button
+    Display board cards
+
+WHEN user clicks "Turn":
+    Deal 1 card to board
+    Disable turn button
+    Enable river button
+    Display board cards
+
+WHEN user clicks "River":
+    Deal 1 card to board
+    Disable river button
+    Display board cards
+
+----------------------------------------
+HAND EVALUATION
+----------------------------------------
+FUNCTION evaluateBestHand(cards):
+    Combine player cards and board cards
+
+    Count occurrences of each card value
+
+    Check for flush:
+        If 5 or more cards share same suit → flush
+
+    Check for straight:
+        If 5 cards are in sequence → straight
+
+    Check for straight flush:
+        If straight AND flush → straight flush
+
+    Check for royal flush:
+        If straight flush from 10 to Ace → royal flush
+
+    Check for four of a kind:
+        If 4 cards have same value
+
+    Check for full house:
+        If 3 of one value AND 2 of another
+
+    Check for three of a kind:
+        If 3 cards have same value
+
+    Check for two pair:
+        If two different pairs exist
+
+    Check for one pair:
+        If 2 cards have same value
+
+    Otherwise:
+        High card
+
+    Return best hand name and description
+
+----------------------------------------
+DISPLAY RESULTS
+----------------------------------------
+IF player has 2 cards:
+    IF board has fewer than 3 cards:
+        Display "Deal the flop"
+    ELSE:
+        Evaluate best hand
+        Display hand name
+        Display hand strength
+
+----------------------------------------
+HAND RANKINGS PAGE
+----------------------------------------
+Create list of hand rankings
+
+FOR each ranking:
+    Display ranking name
+
+WHEN user clicks a ranking:
+    Load example hand (hole cards + board)
+
+    Convert text cards into card objects
+    Display cards visually
+
+    Evaluate hand
+    Display result
+
+----------------------------------------
+CARD DISPLAY SYSTEM
+----------------------------------------
+FUNCTION createCardUI(card):
+    Create visual card element
+    Show rank and suit
+    Apply color styling
+
+----------------------------------------
+END PROGRAM
